@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using GearTrackerAPI.DataAccess.Entities;
 using GearTrackerAPI.Modules;
 using GearTrackerAPI.Services;
 using System;
@@ -48,8 +49,10 @@ namespace GearTrackerAPI.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        [Route("GearTracker/Item"), HttpPost]
+        public async Task<IHttpActionResult> AddItem([FromBody]Item item)
         {
+            return Ok(await _gearTrackingService.AddItem(item));
         }
 
         // PUT api/<controller>/5

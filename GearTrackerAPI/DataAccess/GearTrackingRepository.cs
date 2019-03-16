@@ -21,18 +21,44 @@ namespace GearTrackerAPI.DataAccess
 
         #region Queries
 
-        public async Task<List<Item>> GetAllItemsByUserId(int userId)
+        internal async Task<List<Item>> GetAllItemsByUserId(int userId)
         {
+            IEnumerable<Item> items = null;
             var parameters = new DynamicParameters();
             parameters.Add("@UserId", userId);
             using (var db = new SqlConnection(_dbConnection))
             {
-                var items = await db.QueryAsync<Item>("SELECT * FROM dbo.Item WHERE UserId = @UserId", parameters);
-                return items?.ToList();
+                items = await db.QueryAsync<Item>("SELECT [Id], [UserId], [Name], [Rfid] FROM [dbo].[Item] WHERE [UserId] = @UserId", parameters);
             }
+            return items?.ToList();
         }
 
-        public async Task<List<TrackingHistory>> GetTrackingHistoryByItemId(int itemId)
+        internal async Task<Item> AddItem(Item item)
+        {
+            Item addedItem = null;
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserId", item.UserId);
+            parameters.Add("@Name", item.Name);
+            parameters.Add("@Rfid", item.Rfid);
+            using (var db = new SqlConnection(_dbConnection))
+            {
+                addedItem = await db.QuerySingleAsync<Item>(@"INSERT INTO [dbo].[Item]
+                                                                            ( [Name]
+                                                                            , [Rfid]
+                                                                            , [UserId] )
+                                                                        VALUES
+                                                                            ( @Name
+                                                                            , @Rfid
+                                                                            , @UserId )
+                                                                       SELECT [Id], [UserId], [Name], [Rfid] 
+                                                                         FROM dbo.Item 
+                                                                        WHERE Id = SCOPE_IDENTITY()", parameters);
+
+            }
+            return addedItem;
+        }
+
+        internal async Task<List<TrackingHistory>> GetTrackingHistoryByItemId(int itemId)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ItemId", itemId);
@@ -41,6 +67,31 @@ namespace GearTrackerAPI.DataAccess
                 var history = await db.QueryAsync<TrackingHistory>("SELECT * FROM dbo.TrackingHistory WHERE ItemId = @ItemId", parameters);
                 return history?.ToList();
             }
+        }
+
+        internal async Task<TrackingHistory> AddTrackingHistory(TrackingHistory trackingHistory)
+        {
+            TrackingHistory addedHistory = null;
+            var parameters = new DynamicParameters();
+            parameters.Add("@ItemId", trackingHistory.ItemId);
+            parameters.Add("@Date", trackingHistory.Date);
+            parameters.Add("@Location", trackingHistory.Location);
+            using (var db = new SqlConnection(_dbConnection))
+            {
+                addedHistory = await db.QuerySingleAsync<TrackingHistory>(@"INSERT INTO [dbo].[TrackingHistory]
+                                                                                           ( [ItemId]
+                                                                                           , [Date]
+                                                                                           , [Location])
+                                                                                     VALUES
+                                                                                           ( @ItemId
+		                                                                                   , @Date
+		                                                                                   , @Location )
+	                                                                                SELECT [Id], [ItemId], [Date], [Location] 
+	                                                                                  FROM [dbo].[TrackingHistory]
+	                                                                                 WHERE Id = SCOPE_IDENTITY()", parameters);
+
+            }
+            return addedHistory;
         }
 
         #endregion

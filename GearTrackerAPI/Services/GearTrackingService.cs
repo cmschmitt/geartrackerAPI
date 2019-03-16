@@ -26,5 +26,14 @@ namespace GearTrackerAPI.Services
             return await _gearTrackingRepository.GetTrackingHistoryByItemId(itemId);
         }
 
+        public async Task<Item> AddItem(Item item)
+        {
+            return await _gearTrackingRepository.AddItem(item);
+        }
+
+        public async Task<TrackingHistory> AddTrackingHistory(TrackingHistory trackingHistory)
+        {
+            return await _gearTrackingRepository.AddTrackingHistory(trackingHistory);
+        }
     }
 }
