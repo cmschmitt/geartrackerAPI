@@ -29,9 +29,8 @@ namespace GearTrackerAPI.Controllers
             _container = builder.Build();
         }
 
-        // GET api/<controller>
         /// <summary>
-        /// Returns a list of Items for a specified user.
+        /// Get all Items by UserID.
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
@@ -40,29 +39,38 @@ namespace GearTrackerAPI.Controllers
         {
             return Ok(await _gearTrackingService.GetItemsByUserId(userId));
         }
-
-        // GET api/<controller>
-        [Route("GearTracker/GetItemTrackingHistory")]
+        /// <summary>
+        /// Get all TrackingHistory records by ItemID.
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <returns></returns>
+        [Route("GearTracker/GetTrackingHistory")]
         public async Task<IHttpActionResult> GetItemTrackingHistory(int itemId)
         {
             return Ok(await _gearTrackingService.GetTrackingHistoryByItemId(itemId));
         }
 
-        // POST api/<controller>
+        /// <summary>
+        /// Add new Item to the GearTracking database.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [Route("GearTracker/Item"), HttpPost]
         public async Task<IHttpActionResult> AddItem([FromBody]Item item)
         {
             return Ok(await _gearTrackingService.AddItem(item));
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        /// <summary>
+        /// Add a new TrackingHistory record to the database.
+        /// </summary>
+        /// <param name="trackingHistory"></param>
+        /// <returns></returns>
+        [Route("GearTracker/TrackingHistory"), HttpPost]
+        public async Task<IHttpActionResult> AddTrackingHistory([FromBody]TrackingHistory trackingHistory)
         {
+            return Ok(await _gearTrackingService.AddTrackingHistory(trackingHistory));
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }
