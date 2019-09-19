@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GearTrackerService", "GearTrackerService\GearTrackerService.csproj", "{7ACE612C-09C3-4F5E-901C-D2E65273416F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GearTrackerService.Domain", "GearTrackerService.Domain\GearTrackerService.Domain.csproj", "{A38B97FE-A9B4-46A6-A49C-38E5AD4CCF85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GearTrackerService.Data", "GearTracker.Data\GearTrackerService.Data.csproj", "{95793AE5-B929-43FE-83B4-9F050097C292}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GearTrackerService.Core", "GearTrackerService.Core\GearTrackerService.Core.csproj", "{AE8EF2FF-741D-433F-BBCC-03E2C9A68AC2}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7ACE612C-09C3-4F5E-901C-D2E65273416F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ACE612C-09C3-4F5E-901C-D2E65273416F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ACE612C-09C3-4F5E-901C-D2E65273416F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ACE612C-09C3-4F5E-901C-D2E65273416F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A38B97FE-A9B4-46A6-A49C-38E5AD4CCF85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A38B97FE-A9B4-46A6-A49C-38E5AD4CCF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A38B97FE-A9B4-46A6-A49C-38E5AD4CCF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A38B97FE-A9B4-46A6-A49C-38E5AD4CCF85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95793AE5-B929-43FE-83B4-9F050097C292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95793AE5-B929-43FE-83B4-9F050097C292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95793AE5-B929-43FE-83B4-9F050097C292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95793AE5-B929-43FE-83B4-9F050097C292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE8EF2FF-741D-433F-BBCC-03E2C9A68AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE8EF2FF-741D-433F-BBCC-03E2C9A68AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE8EF2FF-741D-433F-BBCC-03E2C9A68AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE8EF2FF-741D-433F-BBCC-03E2C9A68AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
